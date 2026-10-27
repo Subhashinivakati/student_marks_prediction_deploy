@@ -18,7 +18,7 @@ hours = st.number_input(
     step=0.5
 )
 # Predict when the button is click
-if st.button("Predict Marks", use_container_width=True):
+if st.button("Predicted Marks", use_container_width=True):
     input_data = np.array([[hours]])
     predicted_marks = model.predict(input_data)[0]
     st.success("Prediction Completed!")
