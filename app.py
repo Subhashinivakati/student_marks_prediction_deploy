@@ -18,22 +18,32 @@ hours = st.number_input(
     step=0.5
 )
 # Predict when the button is click
-if st.button("Predicted Marks", use_container_width=True):
+if st.button("Predict Marks", use_container_width=True):
+    # Prepare input data
     input_data = np.array([[hours]])
-    predicted_marks = model.predict(input_data)[0]
+    #Predict student marks
+    predicted_marks = float(model.predict(input_data)[0])
+    # Keep predicted marks within 0–100
+    predicted_marks = max(0.0, min(100.0, predicted_marks))
+    ## Display prediction results
     st.success("Prediction Completed!")
-    st.metric( label="Expected Student Marks", value=f"{predicted_marks:.2f} / 100" )
+    st.metric(
+        label="Expected Student Marks", 
+        value=f"{predicted_marks:.2f} / 100"
+    )
     st.write(f"📚 Hours Studied: {hours}")
     st.write( f"📝 Predicted Marks: {predicted_marks:.2f}" ) 
     # Display performance message
-if predicted_marks >= 80: 
-    st.info("Excellent performance! 🌟")
-elif predicted_marks >= 60: 
-    st.info("Good performance! 👍")
-elif predicted_marks >= 40: 
-    st.info("Average performance. Keep practicing! 📖") 
-else: st.warning("More study and practice may be helpful.")
+    if predicted_marks >= 80: 
+        st.info("Excellent performance! 🌟")
+    elif predicted_marks >= 60: 
+        st.info("Good performance! 👍")
+    elif predicted_marks >= 40: 
+        st.info("Average performance. Keep practicing! 📖") 
+    else: 
+        st.warning("More study and practice may be helpful.")
 st.divider()
+st.caption("Student Marks Prediction App")
 
 
 
