@@ -1,6 +1,6 @@
 import pickle
 import streamlit as st
-
+import numpy as np
 # Set up the web page
 st.title("🎓 Student marks Predictor")
 st.write("Enter the number of hours studied.")
